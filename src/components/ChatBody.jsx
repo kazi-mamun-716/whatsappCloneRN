@@ -7,13 +7,13 @@ import { MessagesData } from '../data/MessageData'
 const ChatBody = () => {
   const scrollViewRef = useRef();
   const userId = '1jdfnvchjkd'
-  const UserMessageView = ({msg, time})=>{
+  const UserMessageView = ({ msg, time }) => {
     return (
       <View style={styles.userContainer}>
         <View style={styles.userMessage}>
           <Text style={styles.msgTxt}>{msg}</Text>
           <Text style={styles.msgTime}>{time}</Text>
-          <VectorIcon 
+          <VectorIcon
             name="check-double"
             type="FontAwesome5"
             size={12}
@@ -24,7 +24,7 @@ const ChatBody = () => {
       </View>
     )
   }
-  const OtherUserMessageView = ({msg, time})=>{
+  const OtherUserMessageView = ({ msg, time }) => {
     return (
       <View style={styles.otherContainer}>
         <View style={styles.otherMessage}>
@@ -34,39 +34,42 @@ const ChatBody = () => {
       </View>
     )
   }
-  const scrollToBottom=()=>{
-    scrollViewRef.current.scrollToEnd({animated: true})
+  const scrollToBottom = () => {
+    scrollViewRef.current.scrollToEnd({ animated: true })
   }
   return (
     <>
-      <ScrollView 
-      ref={scrollViewRef}
-      showsVerticalScrollIndicator={false} 
-      onContentSizeChange={scrollToBottom}
-    >
-      {
-        MessagesData.map(item=>(
-          <>
-          {
-            item.id === userId ? (
-              <UserMessageView msg={item.message} time={item.time} />
-            ):(
-              <OtherUserMessageView msg={item.message} time={item.time} />
-            )
-          }
-          </>
-        ))
-      }
-      
-    </ScrollView>
-    <View style={styles.bottomIcon}>
-      <VectorIcon 
-      name="angle-dobule-down"
-      type="Fontisto"
-      size={12}
-      color={Colors.white}
-    />
-    </View>
+      <ScrollView
+        ref={scrollViewRef}
+        showsVerticalScrollIndicator={false}
+        onContentSizeChange={scrollToBottom}
+      >
+        {
+          MessagesData.map(item => (
+            <>
+              {
+                item.id === userId ? (
+                  <UserMessageView key={item.id} msg={item.message} time={item.time} />
+                ) : (
+                  <OtherUserMessageView key={item.id} msg={item.message} time={item.time} />
+                )
+              }
+            </>
+          ))
+        }
+
+      </ScrollView>
+      <View style={styles.bottomIconContainer}>
+        <View style={styles.bottomIcon}>
+          <VectorIcon
+            name="angle-dobule-down"
+            type="Fontisto"
+            size={12}
+            color={Colors.white}
+            onPress={scrollToBottom}
+          />
+        </View>
+      </View>
     </>
   )
 }
@@ -74,52 +77,56 @@ const ChatBody = () => {
 export default ChatBody
 
 const styles = StyleSheet.create({
-  userContainer:{
+  userContainer: {
     justifyContent: 'flex-end',
     flexDirection: 'row',
-    marginVertical:5
+    marginVertical: 5
   },
-  otherContainer:{
+  otherContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     marginVertical: 5
   },
-  userMessage:{
+  userMessage: {
     backgroundColor: Colors.teal,
     paddingVertical: 8,
-    paddingHorizontal:15,
+    paddingHorizontal: 15,
     borderTopLeftRadius: 30,
     borderBottomRightRadius: 30,
     borderBottomLeftRadius: 30,
     flexDirection: 'row',
     alignItems: 'flex-end'
   },
-  msgTxt:{
+  msgTxt: {
     fontSize: 13,
     color: Colors.white
   },
-  msgTime:{
+  msgTime: {
     fontSize: 9,
     color: Colors.white,
     marginLeft: 5
   },
-  doubleCheck:{
+  doubleCheck: {
     marginLeft: 5
   },
-  otherMessage:{
+  otherMessage: {
     backgroundColor: Colors.primaryColor,
     paddingVertical: 8,
-    paddingHorizontal:15,
+    paddingHorizontal: 15,
     borderTopRightRadius: 30,
-    borderBottomRightRadius:30,
+    borderBottomRightRadius: 30,
     borderBottomLeftRadius: 30,
     flexDirection: 'row',
     alignItems: 'flex-end'
   },
-  bottomIcon:{
+  bottomIconContainer: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end'
+  },
+  bottomIcon: {
     backgroundColor: Colors.primaryColor,
     borderRadius: 50,
-    height:30,
+    height: 30,
     width: 30,
     alignItems: 'center',
     justifyContent: 'center'

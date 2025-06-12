@@ -22,6 +22,7 @@ export default ChatScreen
 const styles = StyleSheet.create({
   wallpaper:{
     flex:1,
-    padding: 10
+    paddingHorizontal: 10,
+    paddingBottom: 5
   }
 })
