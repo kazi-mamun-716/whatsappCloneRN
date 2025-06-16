@@ -17,7 +17,7 @@ const RecentStatus = () => {
       <Text style={styles.recentUpdatesTxt}>Recent updates</Text>
       {
         RecentStatusData.map(item => (
-          <>
+          <View key={item.id}>
             <TouchableOpacity onPress={()=>ViewStatus(item.id)}>
             <View style={styles.storySection}>
               <View style={styles.statusImgContainer}>
@@ -30,12 +30,12 @@ const RecentStatus = () => {
             </View>
           </TouchableOpacity>
           <FullModal 
-            showStatusModal={showModal[item.id]} 
-            setShowStatusModal={value=>prev=>({...prev, [item.id]: value})}
+            showStatusModal={showModal[item.id] || false} 
+            setShowStatusModal={setShowModal}
             setTimeUp={()=>setTimeUp(item.id)}
             item={item}
           />
-          </>
+          </View>
         ))
       }
     </View>

@@ -4,11 +4,14 @@ import VectorIcon from '../utils/VectorIcon'
 import { Colors } from '../theme/Colors'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
-const ChatListScreen = () => {
+const ChatListScreen = ({navigation}) => {
+  const onNavigate =()=>{
+    navigation.navigate('ContactScreen')
+  }
   return (
     <View style={styles.container}>
       <ChatList />
-      <TouchableOpacity style={styles.chatBtn}>
+      <TouchableOpacity onPress={onNavigate} style={styles.chatBtn}>
         <VectorIcon
           type="MaterialCommunityIcons"
           name="message-reply-text"
